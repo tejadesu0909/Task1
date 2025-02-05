@@ -7,16 +7,18 @@ const HeaderComponent = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token"); // Clear the token
-    navigate("/login"); // Redirect to login
+
+    navigate("/");
   };
 
   return (
     <div>
       <header>
-        <nav className="navbar navbar-dark bg-dark">
-          <a className="navbar-brand" href="http://www.gdninfo.net/">
+         <nav className="navbar navbar-dark bg-dark">
+          {/* <a className="navbar-brand" href="http://www.gdninfo.net/"> */}
+          {/* <a className="navbar-brand">
             Employee Management System
-          </a>
+          </a> */} 
           {token && ( // Conditionally display the Logout button
             <button
               className="btn btn-outline-light"
