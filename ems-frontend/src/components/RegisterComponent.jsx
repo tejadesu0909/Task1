@@ -37,8 +37,12 @@ const RegisterComponent = () => {
 
       if (!response.ok) {
         if (responseData.includes("Username already taken")) {
-          setError("User already exists. Please choose a different username");
-        } else {
+          setError("User already exists. Please choose a different Username");
+        } 
+        else if (responseData.includes("Email already registered")){
+          setError("Email already exists. Please choose a different Email.");
+        }
+        else {
           setError("Registration failed. Try again.");
         }
         return;

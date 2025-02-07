@@ -33,7 +33,7 @@ public class SecurityConfigurer {
             .cors(cors -> cors.configurationSource(corsConfigurationSource())) 
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/authenticate", "/auth/register","/auth/authenticate").permitAll()
+                .requestMatchers("/auth/register","/auth/authenticate").permitAll()
                 .requestMatchers("/api/employees/**").authenticated() // Allow all employee endpoints
                 .anyRequest().authenticated()
             )
