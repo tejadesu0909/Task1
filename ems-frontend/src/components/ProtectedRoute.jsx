@@ -1,9 +1,23 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 
+const isTokenValid = () => {
+  const token = localStorage.getItem("token");
+  if (!token) return false;
+
+  try {
+    // Decode token (assuming it's a JWT) to check expiration
+    const payload = JSON.parse(atob(token.split(".")[1]));
+    const isExpired = payload.exp * 1000 < Date.now();
+    return !isExpired;
+  } catch (error) {
+    console.error("Invalid token:", error);
+    return false;
+  }
+};
+
 const ProtectedRoute = ({ children }) => {
-  const token = localStorage.getItem("token"); // Get JWT from localStorage
-  return token ? children : <Navigate to="/login" />;
+  return isTokenValid() ? children : <Navigate to="/login" />;
 };
 
 export default ProtectedRoute;

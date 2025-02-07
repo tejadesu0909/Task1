@@ -52,23 +52,42 @@ public class EmployeeImplementation implements EmployeeService {
 
     @Override
     public EmployeeDto updateEmployeeDto(Long id, EmployeeDto updatedEmployeeDto) {
-        EmployeeEntity employeeEntity = employeeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Employee not found with the give id"+id));
+        EmployeeEntity employeeEntity = employeeRepository.findById(id)
+            .orElseThrow(() -> new ResourceNotFoundException("Employee not found with the given id: " + id));
 
-        employeeEntity.setEmail(updatedEmployeeDto.getEmail());
-        employeeEntity.setEmploymentType(updatedEmployeeDto.getEmploymentType());
-        employeeEntity.setFirstName(updatedEmployeeDto.getFirstName());
-        employeeEntity.setLastName(updatedEmployeeDto.getLastName());
-        employeeEntity.setLocation(updatedEmployeeDto.getLocation());
-        employeeEntity.setPhoneNumber(updatedEmployeeDto.getPhoneNumber());
-        employeeEntity.setSalary(updatedEmployeeDto.getSalary());
-        employeeEntity.setTechnology(updatedEmployeeDto.getTechnology());
-        employeeEntity.setYearsOfExperience(updatedEmployeeDto.getYearsOfExperience());
+        // Only update fields that are not null
+        if (updatedEmployeeDto.getEmail() != null) {
+            employeeEntity.setEmail(updatedEmployeeDto.getEmail());
+        }
+        if (updatedEmployeeDto.getEmploymentType() != null) {
+            employeeEntity.setEmploymentType(updatedEmployeeDto.getEmploymentType());
+        }
+        if (updatedEmployeeDto.getFirstName() != null) {
+            employeeEntity.setFirstName(updatedEmployeeDto.getFirstName());
+        }
+        if (updatedEmployeeDto.getLastName() != null) {
+            employeeEntity.setLastName(updatedEmployeeDto.getLastName());
+        }
+        if (updatedEmployeeDto.getLocation() != null) {
+            employeeEntity.setLocation(updatedEmployeeDto.getLocation());
+        }
+        if (updatedEmployeeDto.getPhoneNumber() != null) {
+            employeeEntity.setPhoneNumber(updatedEmployeeDto.getPhoneNumber());
+        }
+        if (updatedEmployeeDto.getSalary() != null) {
+            employeeEntity.setSalary(updatedEmployeeDto.getSalary());
+        }
+        if (updatedEmployeeDto.getTechnology() != null) {
+            employeeEntity.setTechnology(updatedEmployeeDto.getTechnology());
+        }
+        if (updatedEmployeeDto.getYearsOfExperience() != null) {
+            employeeEntity.setYearsOfExperience(updatedEmployeeDto.getYearsOfExperience());
+        }
 
-        EmployeeEntity updatedEmployeeDtoObj = employeeRepository.save(employeeEntity);
-
-
-        return EmployeeMapper.maptTEmployeeDto(updatedEmployeeDtoObj);
+        EmployeeEntity updatedEmployee = employeeRepository.save(employeeEntity);
+        return EmployeeMapper.maptTEmployeeDto(updatedEmployee);
     }
+
 
     @Override
     public void deleteEmployee(long id) {
@@ -77,6 +96,7 @@ public class EmployeeImplementation implements EmployeeService {
         
     }
 
+	
     
 
    

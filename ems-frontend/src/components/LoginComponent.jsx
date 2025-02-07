@@ -1,18 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const LoginComponent = () => {
+ 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+
+
+  useEffect (()=>{
+    document.title = 'Login'
+
+  }, [])
+   
+  
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:8080/authenticate", {
+      const response = await fetch("http://localhost:8080/auth/authenticate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
       });
-  
+
       if (response.ok) {
         const data = await response.json(); // Parse the JSON response
         const token = data.jwt; // Extract only the raw token string
@@ -26,8 +35,6 @@ const LoginComponent = () => {
       console.error("Login failed:", error);
     }
   };
-  
-  
 
   return (
     <div className="container mt-5" style={{ maxWidth: "400px" }}>

@@ -13,6 +13,10 @@ const ListEmployeeComponent = () => {
     getAllEmployees();
   }, []);
 
+  useEffect(() => {
+    document.title = "List Of Employees";
+  }, []);
+
   // Function to fetch employees from the API
   function getAllEmployees() {
     listOfEmployees()
@@ -21,7 +25,10 @@ const ListEmployeeComponent = () => {
         setEmployee(response.data); // Populate employees state with API data
       })
       .catch((error) => {
-        console.error("Error fetching employee data:", error.response || error.message);
+        console.error(
+          "Error fetching employee data:",
+          error.response || error.message
+        );
       });
   }
 
@@ -36,21 +43,57 @@ const ListEmployeeComponent = () => {
   }
 
   // Handle remove employee with confirmation
+  // async function removeEmployee(id) {
+  //   try {
+  //     // Show confirmation dialog
+  //     await confirm({
+  //       description:
+  //         "Are you sure you want to delete this employee? This action cannot be undone.",
+  //     });
+
+  //     // Proceed with delete
+  //     console.log("Deleting employee with ID:", id);
+  //     await deleteEmployee(id);
+
+  //     // Refresh the list after deletion
+  //     getAllEmployees();
+  //   } catch (error) {
+  //     console.log("Deletion cancelled.");
+  //   }
+  // }
+
   async function removeEmployee(id) {
     try {
       // Show confirmation dialog
       await confirm({
-        description: "Are you sure you want to delete this employee? This action cannot be undone.",
+        description:
+          "Are you sure you want to delete this employee? This action cannot be undone.",
       });
 
       // Proceed with delete
       console.log("Deleting employee with ID:", id);
-      await deleteEmployee(id);
 
-      // Refresh the list after deletion
-      getAllEmployees();
-    } catch (error) {
-      console.log("Deletion cancelled.");
+      try {
+        await deleteEmployee(id);
+        console.log(`Employee with ID ${id} deleted successfully.`);
+
+        // Refresh the list after deletion
+        getAllEmployees();
+      } catch (deleteError) {
+        console.error("Error deleting employee:", deleteError);
+
+        // Log additional error details
+        if (deleteError.response) {
+          console.error("Response Data:", deleteError.response.data);
+          console.error("Status Code:", deleteError.response.status);
+        } else if (deleteError.request) {
+          console.error("No response received:", deleteError.request);
+        } else {
+          console.error("Request Error:", deleteError.message);
+        }
+      }
+    } catch (confirmError) {
+      console.log("Deletion cancelled by user.");
     }
   }
 

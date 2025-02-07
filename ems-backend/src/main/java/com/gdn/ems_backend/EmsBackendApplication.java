@@ -12,5 +12,3 @@ public class EmsBackendApplication {
 }
 
 
-// Spring tool suite
-// intellij

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import NavBar from "../components/LandingPageComponents/NavBar";
 import Hero from "../components/LandingPageComponents/Hero";
@@ -13,6 +13,11 @@ import HeaderComponent from "../components/HeaderComponent";
 
 
 const LandingPage = () => {
+
+  useEffect(()=>
+  {
+document.title = 'EMS-Landing Page'
+  }, [])
   return (
     <div>
       <MainContent />

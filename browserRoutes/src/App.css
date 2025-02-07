@@ -1,0 +1,29 @@
+/* Add this CSS to your stylesheet */
+nav {
+    background-color: #f8f9fa; /* Light gray background */
+    padding: 10px;
+  }
+  
+  nav ul {
+    list-style-type: none; /* Remove bullets */
+    margin: 0;
+    padding: 0;
+    display: flex; /* Display items in a row */
+    justify-content: center; /* Center the nav items */
+  }
+  
+  nav ul li {
+    margin: 0 15px; /* Add spacing between items */
+  }
+  
+  nav ul li a {
+    text-decoration: none; /* Remove underline from links */
+    color: #333; /* Set text color */
+    font-weight: bold;
+    transition: color 0.3s; /* Add hover effect */
+  }
+  
+  nav ul li a:hover {
+    color: #007bff; /* Change color on hover */
+  }
+  

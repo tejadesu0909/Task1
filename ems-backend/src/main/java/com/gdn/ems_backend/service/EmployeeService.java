@@ -14,6 +14,7 @@ public interface EmployeeService {
 
     EmployeeDto updateEmployeeDto(Long id, EmployeeDto updatedEmployeeDto);
 
+
     void deleteEmployee(long id);
 
     // List<EmployeeDto> getAuthDtos();

@@ -9,7 +9,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HeaderComponent from "./components/HeaderComponent";
 import LandingPage from "./pages/LandingPage";
 import { useLocation } from "react-router";
-import Register from "./components/LandingPageComponents/register";
 import GetStarted from "./components/LandingPageComponents/GetStarted";
 import LearnMore from "./components/LandingPageComponents/LearnMore";
 import SeeReports from "./components/LandingPageComponents/SeeReports";
@@ -18,6 +17,7 @@ import Contact from "./components/LandingPageComponents/QuickLinksContactUs";
 import Features from "./components/LandingPageComponents/QuickLinksFeatures";
 import Faqs from "./components/LandingPageComponents/QuickLinksFaqs";
 import ExploreFeatures from "./components/LandingPageComponents/ExploreFeatures";
+import RegisterComponent from "./components/RegisterComponent";
 
 function App() {
   // const location = useLocation();
@@ -35,7 +35,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<LoginComponent />} />
-          <Route path="/register" element={<Register />} />
+          {/* <Route path="/register" element={<Register />} /> */}
           <Route path="/getStarted" element={<GetStarted />} />
           <Route path="/learnMore" element={<LearnMore />} />
           <Route path="/ExploreFeatures" element={<ExploreFeatures />} />
@@ -44,6 +44,8 @@ function App() {
           <Route path="/QuickLinksContactUs" element={<Contact />} />
           <Route path="/QuickLinksFeatures" element={<Features />} />
           <Route path="/QuickLinksFaqs" element={<Faqs />} />
+          <Route path="/register" element={<RegisterComponent />} />  
+
 
           <Route
             path="/employees"
